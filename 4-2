@@ -1,0 +1,34 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.edge.service import Service
+from selenium.webdriver.edge.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+import time
+
+service = Service("msedgedriver.exe")
+
+options = Options()
+options.add_argument("--start-maximized")
+
+driver = webdriver.Edge(service=service, options=options)
+
+driver.get("https://www.facebook.com")
+
+wait = WebDriverWait(driver, 30)
+
+# Wait for email field
+email = wait.until(EC.visibility_of_element_located((By.NAME, "email")))
+password = wait.until(EC.visibility_of_element_located((By.NAME, "pass")))
+
+email.send_keys("vshree56@gmail.com")
+password.send_keys("Rekharaj@123")
+
+# Press ENTER instead of clicking
+password.send_keys(Keys.RETURN)
+
+print("Login attempted")
+
+time.sleep(15)
+driver.quit()
