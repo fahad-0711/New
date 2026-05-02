@@ -1,0 +1,39 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.edge.service import Service
+from selenium.webdriver.edge.options import Options
+import time
+
+# Setup Edge options
+edge_options = Options()
+
+# Path to msedgedriver
+service = Service("msedgedriver.exe")
+
+# Launch Edge browser
+driver = webdriver.Edge(service=service, options=edge_options)
+
+# Open Google homepage
+driver.get("https://www.google.com")
+
+# Maximize window
+driver.maximize_window()
+
+# Wait for page to load
+time.sleep(2)
+
+# Locate the search box using name attribute
+search_box = driver.find_element(By.NAME, "q")
+
+# Print confirmation
+if search_box:
+    print("Test Passed")
+else:
+    print("Test Failed")
+
+print("Automationnnnn!")
+
+# Close browser after 5 seconds
+time.sleep(5)
+driver.quit()
+
